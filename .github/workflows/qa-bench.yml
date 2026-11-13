@@ -17,4 +17,4 @@ jobs:
           QA_BENCH_PATH: identityflow/web/qa-bench.html
           QA_INDEX_PATH: identityflow/web/index.html
           QA_BENCH_SCRIPT: 
-        run: node --test qa/bench-validation.test.cjs
+        run: node --test qa/bench-validation.test.cjs qa/source-proof.test.cjs
