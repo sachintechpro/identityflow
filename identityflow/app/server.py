@@ -15,7 +15,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(status)
         for k,v in {'Content-Type':mime+'; charset=utf-8','Content-Length':str(len(body)),
                     'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','X-Frame-Options':'DENY',
-                    'Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'none'"}.items():self.send_header(k,v)
+                    'Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'none'"}.items():self.send_header(k,v)
         if cookie is not None:
             secure='; Secure' if os.getenv('RENDER') or os.getenv('COOKIE_SECURE')=='1' else ''
             self.send_header('Set-Cookie',f'if_session={cookie}; HttpOnly; SameSite=Strict; Path=/; Max-Age={SESSION_TTL_SECONDS if cookie else 0}{secure}')
