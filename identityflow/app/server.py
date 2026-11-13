@@ -38,6 +38,7 @@ class Handler(BaseHTTPRequestHandler):
     def route(self,method,head=False):
         path=urlsplit(self.path).path
         try:
+            if path=='/qa-bench.html' and method=='GET':return self.respond(200,(HOME.parent/'qa-bench.html').read_bytes(),'text/html',head=head)
             if path=='/' and method=='GET':return self.respond(200,HOME.read_bytes(),'text/html',head=head)
             if path=='/api/health' and method=='GET':return self.respond(200,{'status':'ok','mode':'simulated-iam'},head=head)
             if path=='/api/demo-users' and method=='GET':return self.respond(200,[{'username':u,'role':v[1]} for u,v in DEMO_PROFILES.items()],head=head)
